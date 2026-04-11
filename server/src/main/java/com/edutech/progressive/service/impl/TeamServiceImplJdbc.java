@@ -33,13 +33,12 @@ public class TeamServiceImplJdbc implements TeamService {
     @Override
     public List<Team> getAllTeamsSortedByName() throws SQLException{
         List<Team> list = teamDAO.getAllTeams();
-        Collections.sort(list,new Comparator<Team>() {
-            @Override
-            public int compare(Team arg0, Team arg1) {
-                return  arg0.getTeamName().compareTo(arg1.getTeamName());
-            }
-            
-        });
+        // Collections.sort(list,new Comparator<Team>() {
+        //     @Override
+        //     public int compare(Team arg0, Team arg1) {
+        //         return  arg0.getTeamName().compareTo(arg1.getTeamName());
+        //     }
+        // });
         return list;
 
     }

@@ -11,7 +11,7 @@ import org.hibernate.annotations.GeneratorType;
 
 @Entity
 @Table(name = "team")
-public class Team implements Comparable<Team>{
+public class Team implements Comparable<Team> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

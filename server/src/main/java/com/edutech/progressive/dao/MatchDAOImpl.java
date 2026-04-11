@@ -40,7 +40,8 @@ public class MatchDAOImpl implements MatchDAO {
              int key =rs.getInt(1);
              return key;
             }
- 
+
+            
         }
         return count;
 }
@@ -61,7 +62,7 @@ public class MatchDAOImpl implements MatchDAO {
 
     @Override
     public void updateMatch(Match match) throws SQLException{
-       String sql = "update matches set first_team_id=?,second_team_id=?,match_date=?,venue=?,result=?,status=?,winner_team_id=? where match_id=?";
+       String sql = "update matches set first_team_id=?, second_team_id=? , match_date=? ,venue=?,result=?,status=?,winner_team_id=? where match_id=?";
             PreparedStatement ps = conn.prepareStatement(sql);
             ps.setInt(1, match.getFirstTeamId());
             ps.setInt(2, match.getSecondTeamId());
