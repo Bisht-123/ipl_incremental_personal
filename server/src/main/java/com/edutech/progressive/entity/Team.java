@@ -1,11 +1,29 @@
 package com.edutech.progressive.entity;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
+
+import org.hibernate.annotations.GeneratorType;
+
+@Entity
+@Table(name = "team")
 public class Team implements Comparable<Team>{
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "team_id")
     private int teamId;
+    @Column(name = "team_name")
     private String teamName;
+    @Column(name="location")
     private String location;
+    @Column(name="owner_name")
     private String ownerName;
+    @Column(name="establishment_year")
     private int establishmentYear;
     public Team() {
     }

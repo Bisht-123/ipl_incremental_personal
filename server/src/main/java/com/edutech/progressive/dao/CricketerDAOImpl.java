@@ -8,7 +8,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-// import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
+import org.hibernate.engine.jdbc.spi.SqlExceptionHelper;
 
 import com.edutech.progressive.config.DatabaseConnectionManager;
 import com.edutech.progressive.entity.Cricketer;
@@ -58,8 +58,8 @@ public class CricketerDAOImpl implements CricketerDAO {
             ps.setInt(1, cricketerId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                cricketer = new Cricketer(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-                        rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getInt(9));
+                cricketer = new Cricketer(rs.getInt("cricketer_id"), rs.getInt("team_id"), rs.getString("cricketer_name"), rs.getInt("age"), rs.getString("nationality"),
+                        rs.getInt("experience"), rs.getString("role"), rs.getInt("total_runs"), rs.getInt("total_wickets"));
             }
         return cricketer;
     }
@@ -95,8 +95,8 @@ public class CricketerDAOImpl implements CricketerDAO {
           PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Cricketer(rs.getInt(1), rs.getInt(2), rs.getString(3), rs.getInt(4), rs.getString(5),
-                        rs.getInt(6), rs.getString(7), rs.getInt(8), rs.getInt(9)));
+                list.add(new Cricketer(rs.getInt("cricketer_id"), rs.getInt("team_id"), rs.getString("cricketer_name"), rs.getInt("age"), rs.getString("nationality"),
+                        rs.getInt("experience"), rs.getString("role"), rs.getInt("total_runs"), rs.getInt("total_wickets")));
             }
        return list;
 

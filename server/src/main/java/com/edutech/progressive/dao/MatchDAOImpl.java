@@ -53,8 +53,8 @@ public class MatchDAOImpl implements MatchDAO {
             ps.setInt(1, matchId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                match = new Match(rs.getInt(1), rs.getInt(2),rs.getInt(3), rs.getDate(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8));
+                match = new Match(rs.getInt("match_id"), rs.getInt("first_team_id"),rs.getInt("second_team_id"), rs.getDate("match_date"), rs.getString("venue"), rs.getString("result"),
+                        rs.getString("status"), rs.getInt("winner_team_id"));
             }
         return match;
     }
@@ -90,8 +90,8 @@ public class MatchDAOImpl implements MatchDAO {
           PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Match(rs.getInt(1),rs.getInt(2), rs.getInt(3), rs.getDate(4), rs.getString(5), rs.getString(6),
-                        rs.getString(7), rs.getInt(8)));
+                list.add(new Match(rs.getInt("match_id"), rs.getInt("first_team_id"),rs.getInt("second_team_id"), rs.getDate("match_date"), rs.getString("venue"), rs.getString("result"),
+                        rs.getString("status"), rs.getInt("winner_team_id")));
             }
        return list;
     }

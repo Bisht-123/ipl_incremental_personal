@@ -48,8 +48,8 @@ public class TeamDAOImpl implements TeamDAO  {
             ps.setInt(1, teamId);
             ResultSet rs = ps.executeQuery();
             if (rs.next()) {
-                team = new Team(rs.getInt(1), rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getInt(5));
+                team = new Team(rs.getInt("team_id"), rs.getString("team_name"), rs.getString("location"),
+                        rs.getString("owner_name"), rs.getInt("establishment_year"));
             }
         return team;
     }
@@ -82,8 +82,8 @@ public class TeamDAOImpl implements TeamDAO  {
           PreparedStatement ps = conn.prepareStatement(sql);
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
-                list.add(new Team(rs.getInt(1),  rs.getString(2), rs.getString(3),
-                        rs.getString(4), rs.getInt(5)));
+                list.add(new Team(rs.getInt("team_id"),  rs.getString("team_name"), rs.getString("location"),
+                        rs.getString("owner_name"), rs.getInt("establishment_year")));
             }
        return list;
     }
