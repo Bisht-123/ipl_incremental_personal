@@ -2,15 +2,19 @@ package com.edutech.progressive.controller;
 
 import com.edutech.progressive.entity.Team;
 import com.edutech.progressive.service.impl.TeamServiceImplArraylist;
+// import com.edutech.progressive.service.impl.TeamServiceImplArraylist;
 import com.edutech.progressive.service.impl.TeamServiceImplJdbc;
+import com.edutech.progressive.service.impl.TeamServiceImplJpa;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -20,37 +24,51 @@ import java.util.List;
 public class TeamController {
     @Autowired
     TeamServiceImplArraylist teamServiceImplArraylist;
-    TeamServiceImplJdbc teamServiceImplJdbc;
-    public ResponseEntity<List<Team>> getAllTeams() {
-        return null;
+    @Autowired
+    TeamServiceImplJpa teamServiceImplJpa;
+    public ResponseEntity<List<Team>> getAllTeams() throws SQLException {
+        
+         return new ResponseEntity<>(teamServiceImplJpa.getAllTeams(),HttpStatus.OK);
     }
     
     @GetMapping("/{teamId}")
     public ResponseEntity<Team> getTeamById(int teamId) throws SQLException {
-        return  null;
+       
+        return new  ResponseEntity<>(teamServiceImplJpa.getTeamById(teamId),HttpStatus.OK);
     }
     
     @PostMapping
-    public ResponseEntity<Integer> addTeam(Team team) throws SQLException {
-        return new ResponseEntity<>(teamServiceImplJdbc.addTeam(team),HttpStatus.OK);
+    public ResponseEntity<Integer> addTeam(@RequestBody Team team) throws SQLException {
+       
+        return new ResponseEntity<>(teamServiceImplJpa.addTeam(team),HttpStatus.CREATED);
     }
     @PutMapping("/{teamId}")
-    public ResponseEntity<Void> updateTeam(int teamId, Team team) throws SQLException {
-        return null;
+    public ResponseEntity<Void> updateTeam(@PathVariable int teamId , @RequestBody Team team) throws SQLException {
+        if(teamServiceImplJpa.getTeamById(teamId) == null){
+            return null;
+        }
+        teamServiceImplJpa.updateTeam(teamId,team);
+         return new ResponseEntity<>(HttpStatus.OK);
+        
     }
 
     @DeleteMapping("/{teamId}")
-    public ResponseEntity<Void> deleteTeam(int teamId) throws SQLException {
-        return null;
+    public ResponseEntity<Void> deleteTeam(@PathVariable int teamId) throws SQLException {
+        teamServiceImplJpa.deleteTeam(teamId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        
+
     }
 
     @GetMapping("/fromArrayList")
-    public ResponseEntity<List<Team>> getAllTeamsFromArrayList() {
+    public ResponseEntity<List<Team>> getAllTeamsFromArrayList() throws SQLException {
         return new ResponseEntity<>(teamServiceImplArraylist.getAllTeams(),HttpStatus.OK); 
+
     }
     
     @PostMapping("/toArrayList")
     public ResponseEntity<Integer> addTeamToArrayList(Team team) {
+
         return new ResponseEntity<>(teamServiceImplArraylist.addTeam(team),HttpStatus.CREATED) ;
     }
    

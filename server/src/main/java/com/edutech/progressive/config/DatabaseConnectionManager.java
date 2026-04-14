@@ -27,9 +27,5 @@ public class DatabaseConnectionManager {
                throw new RuntimeException("Database connection failed", e);
             }
         }
-<<<<<<< HEAD
-    }
-=======
-    }
+}
 
->>>>>>> 129d0cb5070808ed52ee94fe1b7520463eafb744
