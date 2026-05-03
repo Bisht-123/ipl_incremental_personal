@@ -1,50 +1,91 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
+import { Router } from '@angular/router';
+
+import { catchError, of, tap } from 'rxjs';
+
+import { AuthService } from '../../services/auth.service';
+
 @Component({
+
   selector: 'app-login',
+
   templateUrl: './login.component.html',
+
   styleUrls: ['./login.component.scss']
+
 })
-export class LoginComponent {
 
-  loginForm: FormGroup;
-  successMessage = '';
-  errorMessage = '';
+export class LoginComponent implements OnInit {
 
-  constructor(private fb: FormBuilder) {
-    this.loginForm = this.fb.group({
-      username: ['', [
-        Validators.required,
-        Validators.pattern('^[a-zA-Z0-9]+$')
-      ]],
-      password: ['', [
-        Validators.required,
-        Validators.minLength(8),
-        Validators.pattern('^(?=.*[A-Z])(?=.*[0-9]).+$')
-      ]]
+  loginForm!: FormGroup;
+
+  errorMessage: string | null = null;
+
+  constructor(
+
+    private formBuilder: FormBuilder,
+
+    private authService: AuthService,
+
+    private router: Router
+
+  ) { }
+
+  ngOnInit(): void {
+
+    this.loginForm = this.formBuilder.group({
+
+      username: ['', [Validators.required, Validators.pattern(/^[a-zA-Z0-9]+$/)]],
+
+      password: ['', [Validators.required, Validators.minLength(8)]]
+
     });
+
   }
 
   onSubmit(): void {
-  // ✅ Case 1: invalid username format
-  if (this.loginForm.invalid) {
-    this.errorMessage = 'Please fill out all required fields correctly.';
-    this.successMessage = '';
-    this.loginForm.markAllAsTouched();
-    return;
+
+    if (this.loginForm.valid) {
+
+      this.authService.login(this.loginForm.value).pipe(
+
+        tap((response) => {
+
+          console.log(response);
+
+          localStorage.setItem("token", response['token']);
+
+          localStorage.setItem("role", response['roles']);
+
+          localStorage.setItem("user_id", response['userId']);
+
+          console.log(localStorage.getItem("role"));
+
+          this.router.navigate(["ipl"]);
+
+        }),
+
+        catchError((error: string) => {
+
+          this.errorMessage = 'Invalid username or password';
+
+          console.error("Login error:", error);
+
+          return of(null);
+
+        })
+
+      ).subscribe();
+
+    } else {
+
+      this.errorMessage = '';
+
+    }
+
   }
-
-  // ✅ Case 2: backend authentication failure (ALWAYS)
-  this.errorMessage = 'Invalid username or password.';
-  this.successMessage = '';
-}
-
-
-simulateBackendLoginError(): boolean {
-  const username = this.loginForm.value.username;
-  return username && username.toLowerCase() === 'invaliduser';
-}
-
 
 }
