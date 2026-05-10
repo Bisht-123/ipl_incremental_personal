@@ -1,1 +1,46 @@
 /* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&display=swap');
+
+:root {
+  --ipl-red:       #e8272e;
+  --ipl-red-dark:  #c41c1c;
+  --ipl-gold:      #f59e0b;
+  --ipl-gold-dark: #d97706;
+  --ipl-navy:      #0f172a;
+  --ipl-navy-mid:  #1a1a2e;
+  --ipl-slate:     #334155;
+  --ipl-bg:        #f1f5f9;
+  --ipl-white:     #ffffff;
+  --ipl-border:    rgba(0,0,0,0.07);
+  --radius-sm:     8px;
+  --radius-md:     12px;
+  --radius-lg:     18px;
+  --shadow-sm:     0 2px 8px rgba(0,0,0,0.08);
+  --shadow-md:     0 4px 20px rgba(0,0,0,0.1);
+  --shadow-lg:     0 8px 40px rgba(0,0,0,0.15);
+}
+
+*, *::before, *::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  background: var(--ipl-bg);
+  color: var(--ipl-slate);
+  -webkit-font-smoothing: antialiased;
+}
+
+a {
+  text-decoration: none;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+}

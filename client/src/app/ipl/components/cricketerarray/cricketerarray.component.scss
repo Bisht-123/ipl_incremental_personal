@@ -1,40 +1,68 @@
 .cricketer-list-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 1rem;
-  background-color: #f9f9f9;
-  border-radius: 10px;
- 
+  max-width: 700px;
+  margin: 40px auto;
+  padding: 32px 28px;
+  background: #ffffff;
+  border-radius: 18px;
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+  border: 1px solid rgba(0, 0, 0, 0.05);
+
   h2 {
     text-align: center;
-    color: #007bff;
-    margin-bottom: 0.5rem;
+    font-size: 22px;
+    font-weight: 800;
+    color: #0f172a;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 3px solid;
+    border-image: linear-gradient(90deg, #e8272e, #f59e0b) 1;
   }
- 
+
   button {
     display: block;
-    margin: 1rem auto;
-    padding: 0.5rem 1rem;
-    background-color: #007bff;
+    margin: 0 auto 24px;
+    padding: 11px 28px;
+    background: linear-gradient(135deg, #e8272e, #c41c1c);
     color: white;
     border: none;
-    border-radius: 5px;
+    border-radius: 10px;
     cursor: pointer;
- 
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: 0.4px;
+    box-shadow: 0 4px 16px rgba(232, 39, 46, 0.28);
+    transition: all 0.22s ease;
+    font-family: inherit;
+
     &:hover {
-      background-color: #0056b3;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(232, 39, 46, 0.38);
     }
   }
 }
- 
+
 .cricketer-card {
-  margin-bottom: 1rem;
-  padding: 1rem;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 8px;
- 
+  margin-bottom: 14px;
+  padding: 18px 22px;
+  background: #f8fafc;
+  border: 1.5px solid #e2e8f0;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    border-color: #e8272e;
+    box-shadow: 0 4px 16px rgba(232, 39, 46, 0.1);
+    background: #fff;
+  }
+
   p {
-    margin: 0.2rem 0;
+    margin: 5px 0;
+    font-size: 14px;
+    color: #475569;
+
+    strong {
+      color: #0f172a;
+      font-weight: 600;
+    }
   }
 }
